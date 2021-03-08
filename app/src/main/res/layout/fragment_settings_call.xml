@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="presenter"
+            type="ru.true_ip.trueip.app.main_screen.settings_fragments.settings_calls_fragment.SettingsCallPresenter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:gravity="center_vertical"
+            android:onCheckedChanged="@{presenter::onCheckedChanged}"
+            android:checked="@={presenter.isVideoEnabled}"
+            android:padding="16dp"
+            android:text="@string/call_video"
+            android:textSize="@dimen/dimen_16sp" />
+
+    </LinearLayout>
+</layout>

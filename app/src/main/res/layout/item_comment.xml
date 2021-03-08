@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/comment_item_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:layout_marginBottom="@dimen/dimen_10dp">
+
+        <TextView
+            android:id="@+id/comment_item_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Test"
+            android:textSize="@dimen/text_dimen_20sp"
+            android:padding="@dimen/dimen_4dp"/>
+
+        <TextView
+            android:id="@+id/comment_item_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_120dp"
+            android:padding="@dimen/dimen_4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="@dimen/text_dimen_17sp"
+            android:text="Test testTest testTest testTest testTest testTest testTest testTest testTest testTest testTest testTest testTest testTest testTest test"
+            android:textColor="@color/gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/comment_item_status"
+                android:layout_width="@dimen/dimen_12dp"
+                android:layout_height="@dimen/dimen_12dp"
+                android:layout_gravity="center"
+                android:padding="@dimen/dimen_4dp"
+                android:background="@drawable/round_background_green"/>
+
+            <TextView
+                android:id="@+id/comment_item_status_string"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Test (Test)"
+                android:padding="@dimen/dimen_4dp"
+                android:textSize="@dimen/text_dimen_17sp"
+                android:gravity="center"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

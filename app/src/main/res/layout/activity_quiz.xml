@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="v"
+            type="android.view.View" />
+
+        <variable
+            name="presenter"
+            type="ru.true_ip.trueip.app.quizzes_screen.quiz_screen.QuizPresenter" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    app:titleTextColor="@color/black">
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/text_quiz"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <ImageButton
+                        android:id="@+id/home_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dimen_18dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_home_silhouette"
+                        android:layout_gravity="end"/>
+
+                </android.support.v7.widget.Toolbar>
+            </RelativeLayout>
+
+        </android.support.design.widget.AppBarLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/appbar_layout"
+            android:overScrollMode="ifContentScrolls">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/dimen_16sp"
+                android:paddingBottom="@dimen/dimen_16sp"
+                android:paddingStart="@dimen/dimen_14dp"
+                android:paddingEnd="@dimen/dimen_14dp">
+
+                <TextView
+                    android:id="@+id/main_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_dimen_14sp"
+                    android:textColor="@color/charcoal_grey"
+                    android:layout_marginStart="@dimen/dimen_6dp"
+                    android:layout_marginEnd="@dimen/dimen_6dp"
+                    android:text="@{presenter.mainText}" />
+
+                <TextView
+                    android:id="@+id/quiz_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/main_text"
+                    android:layout_marginTop="@dimen/dimen_22dp"
+                    android:layout_marginStart="@dimen/dimen_11dp"
+                    android:layout_marginEnd="@dimen/dimen_11dp"
+                    android:textSize="@dimen/text_dimen_12sp"
+                    android:textColor="@color/black"
+                    android:text="@{presenter.quizTitle}" />
+                <TextView
+                    android:id="@+id/quiz_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/quiz_title"
+                    android:layout_marginTop="@dimen/dimen_5dp"
+                    android:layout_marginStart="@dimen/dimen_11dp"
+                    android:layout_marginEnd="@dimen/dimen_11dp"
+                    android:textSize="@dimen/text_dimen_9sp"
+                    android:textColor="@color/grey_text"
+                    android:visibility="@{presenter.quizTypeVisible ? v.VISIBLE : v.INVISIBLE}"
+                    android:text="@{presenter.quizType}" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/options_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/quiz_type"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:overScrollMode="never"
+                    app:setAdapter="@{presenter.answersAdapter}"
+                    app:layoutManager="@{presenter.linearLayoutManager}" />
+
+                <Button
+                    android:layout_height="@dimen/dimen_30dp"
+                    android:layout_width="@dimen/dimen_120dp"
+                    android:layout_below="@id/options_list"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:background="@drawable/background_rounded_blue_radius2"
+                    android:textColor="@android:color/white"
+                    android:textAllCaps="false"
+                    android:text="@string/text_answer"
+                    android:enabled="@{presenter.hasSelectedOption}"
+                    android:visibility="@{presenter.isQuizPassed ? v.GONE : v.VISIBLE}"
+                    android:onClick="@{presenter::onAnswerButtonClick}" />
+            </RelativeLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+</layout>

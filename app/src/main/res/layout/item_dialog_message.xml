@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_10dp">
+        <RelativeLayout
+            android:id="@+id/question_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_40dp"
+                android:layout_alignParentEnd="true">
+                <TextView
+                    android:id="@+id/comment_question"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:padding="@dimen/dimen_5dp"
+                    android:minWidth="@dimen/dimen_30dp"
+                    android:textSize="@dimen/text_dimen_17sp"
+                    android:background="@drawable/drawable_bubble_right" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_15dp"
+                    android:layout_height="@dimen/dimen_15dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/comment_question"
+                    android:src="@drawable/right_corner" />
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/answer_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimen_40dp"
+                android:layout_alignParentStart="true">
+                <TextView
+                    android:id="@+id/comment_answer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/dimen_30dp"
+                    android:padding="@dimen/dimen_5dp"
+                    android:textSize="@dimen/text_dimen_17sp"
+                    android:background="@drawable/drawable_bubble_left" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_15dp"
+                    android:layout_height="@dimen/dimen_15dp"
+                    android:layout_below="@id/comment_answer"
+                    android:layout_alignParentStart="true"
+                    android:src="@drawable/left_corner" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

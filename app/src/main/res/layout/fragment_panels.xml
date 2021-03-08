@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="v"
+            type="android.view.View" />
+
+        <variable
+            name="presenter"
+            type="ru.true_ip.trueip.app.object_screen.panels_fragment.PanelsPresenter" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/back"
+                android:scaleType="centerCrop" />
+
+            <FrameLayout
+                android:id="@+id/top_container"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_24dp"
+                android:background="@color/colorPrimaryDark"
+                android:visibility="@{presenter.isHLMObject ? v.GONE : v.VISIBLE}">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:onClick="@{presenter::onClickChange}"
+                    android:paddingEnd="@dimen/dimen_16dp"
+                    android:text="@{presenter.isEditMode ? @string/apply : @string/change}"
+                    android:textColor="@color/white"
+                    android:visibility="@{presenter.isHLMObject ? v.INVISIBLE : v.VISIBLE}"/>
+
+            </FrameLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_camera_devices"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/top_container"
+                android:layout_marginLeft="@dimen/dimen_8dp"
+                android:layout_marginRight="@dimen/dimen_8dp"
+                android:clipToPadding="false"
+                android:paddingBottom="@dimen/dimen_8dp"
+                android:paddingTop="@dimen/dimen_8dp"
+                android:setAdapter="@{presenter.panelsAdapter}"
+                app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                app:spanCount="3" />
+
+        </RelativeLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="@dimen/dimen_16dp"
+            android:onClick="@{presenter::onClickAdd}"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_add"
+            app:backgroundTint="@color/colorPrimary"
+            android:visibility="@{presenter.isHLMObject ? v.INVISIBLE : v.VISIBLE}"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

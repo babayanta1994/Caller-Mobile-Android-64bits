@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#9b9b9b</color>
+    <color name="colorAccent">#00b6e2</color>
+    <color name="color_icon_gray">#7f7f7f</color>
+    <color name="color_btn_login">#0cdbfa</color>
+    <color name="text_not_active">#9b9b9b</color>
+    <color name="black">#000000</color>
+    <color name="dark_gray">#333333</color>
+    <color name="light_gray">#e5e5e5</color>
+    <color name="white">#FFFFFF</color>
+    <color name="bubble_color">#EEEEEE</color>
+    <color name="gray">#787878</color>
+    <color name="aqua_blue">#00b9e6</color>
+    <color name="screen_login_color_house_text">#0058a8</color>
+    <color name="grey_color">#d7d7d7</color>
+    <color name="grey_text">#9b9b9b</color>
+    <color name="charcoal_grey">#4a4a4a</color>
+    <color name="pinkish_grey">#bbbbbb</color>
+    <color name="almost_white">#dddddd</color>
+    <color name="pale_red">#e64545</color>
+    <color name="white_two_transparent">#7dd8d8d8</color>
+    <color name="white_two">#d8d8d8</color>
+    <color name="color_indicator_active">#7ed321</color>
+    <color name="color_indicator_inactive">#d0011b</color>
+    <color name="color_indicator_unknown">#6d6d72</color>
+    <color name="scarlet">#d0011b</color>
+    <color name="slate_grey">#6d6d72</color>
+    <color name="quiz_pic_color">#1b76ed</color>
+    <color name="color_status_in_work">#F8E71C</color>
+
+</resources>

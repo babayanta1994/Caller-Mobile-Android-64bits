@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="presenter"
+            type="ru.true_ip.trueip.app.main_screen.objects_fragment.ObjectsPresenter" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:background="@drawable/back" />
+
+        <FrameLayout
+            android:id="@+id/header_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_24dp"
+            android:background="@color/colorPrimaryDark">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:onClick="@{presenter::onEditClick}"
+                android:paddingEnd="@dimen/dimen_16dp"
+                android:text="@{presenter.isEditMode ? @string/apply : @string/change}"
+                android:textColor="@color/white" />
+
+        </FrameLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/header_container">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/text_locally"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_12dp"
+                    android:layout_marginTop="@dimen/dimen_16dp"
+                    android:text="@string/text_locally"
+                    android:textColor="@color/white" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/object_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text_locally"
+                    android:layout_marginTop="@dimen/dimen_4dp"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    android:setAdapter="@{presenter.localObjectAdapter}"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+                <TextView
+                    android:id="@+id/text_hlm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/object_rv"
+                    android:layout_marginLeft="@dimen/dimen_12dp"
+                    android:layout_marginTop="@dimen/dimen_16dp"
+                    android:text="@string/text_hlm"
+                    android:textColor="@color/white" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/hlm_object_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text_hlm"
+                    android:layout_marginTop="@dimen/dimen_4dp"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    android:setAdapter="@{presenter.hlmObjectAdapter}"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+            </RelativeLayout>
+        </ScrollView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/dimen_16dp"
+            android:onClick="@{presenter::onClickAdd}"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_add"
+            app:backgroundTint="@color/colorPrimary" />
+
+    </RelativeLayout>
+</layout>

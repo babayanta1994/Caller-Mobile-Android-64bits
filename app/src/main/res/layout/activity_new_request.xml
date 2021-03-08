@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="v"
+            type="android.view.View" />
+
+        <variable
+            name="input"
+            type="android.text.InputType" />
+
+        <variable
+            name="presenter"
+            type="ru.true_ip.trueip.app.requests_screen.new_request_screen.NewRequestPresenter" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <!-- AppBar layout -->
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar_layout"
+            android:layout_width="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    app:titleTextColor="@color/black">
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:text="@{presenter.title}" />
+
+                    <ImageButton
+                        android:id="@+id/new_request_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="@dimen/dimen_18dp"
+                        android:background="@android:color/transparent"
+                        android:clickable="true"
+                        android:src="@drawable/ic_home_silhouette" />
+
+                </android.support.v7.widget.Toolbar>
+            </RelativeLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/appbar_layout">
+            <LinearLayout
+                android:id="@+id/main_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!-- Claim category -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/text_category" />
+
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/new_request_categories"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingEnd="20dp"
+                        android:paddingStart="20dp" />
+                </LinearLayout>
+
+                <!-- Request Date -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:weightSum="10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_request_at_date"
+                        android:gravity="center_vertical" />
+
+                    <TextView
+                        android:layout_weight="5"
+                        android:id="@+id/new_request_date_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="10dp"
+                        android:textSize="@dimen/text_dimen_17sp"
+                        android:textColor="@color/selector_request_text_fields"
+                        android:onClick="@{presenter::onRequestDateClicked}"
+                        android:text="@{presenter.dateTime}"
+                        android:enabled="@{presenter.isEditMode}"/>
+                </LinearLayout>
+
+                <!-- Phone Number -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:weightSum="10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_phone_number"
+                        android:gravity="center_vertical"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="10dp"
+                        android:textSize="@dimen/text_dimen_17sp"
+                        android:textColor="@color/selector_request_text_fields"
+                        android:text="@={presenter.phoneNumber}"
+                        android:visibility="@{presenter.isEditMode ? v.GONE : v.VISIBLE}" />
+
+                    <EditText
+                        android:layout_weight="5"
+                        android:id="@+id/new_request_phone_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="10dp"
+                        android:textSize="@dimen/text_dimen_17sp"
+                        android:inputType="phone"
+                        android:textColor="@color/selector_request_text_fields"
+                        android:text="@={presenter.phoneNumber}"
+                        android:visibility="@{presenter.isEditMode ? v.VISIBLE : v.GONE}" />
+                </LinearLayout>
+
+                <!-- Request Reason -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_request_reason" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="vertical"
+                        android:textSize="@dimen/text_dimen_17sp"
+                        android:textColor="@color/selector_request_text_fields"
+                        android:text="@={presenter.reason}"
+                        android:visibility="@{presenter.isEditMode ? v.GONE : v.VISIBLE}" />
+
+                    <EditText
+                        android:id="@+id/new_request_reasont_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top|start"
+                        android:inputType="textMultiLine"
+                        android:lines="8"
+                        android:maxLines="10"
+                        android:minLines="4"
+                        android:scrollbars="vertical"
+                        android:textColor="@color/selector_request_text_fields"
+                        android:text="@={presenter.reason}"
+                        android:visibility="@{presenter.isEditMode ? v.VISIBLE : v.GONE}" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimen_10dp"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="@dimen/dimen_150dp"
+                        android:layout_height="@dimen/dimen_30dp"
+                        android:background="@drawable/background_attatch_button"
+                        android:textAllCaps="false"
+                        android:visibility="@{presenter.isEditMode ? v.VISIBLE : v.GONE}"
+                        android:drawableStart="@drawable/ic_paperclip"
+                        android:drawablePadding="@dimen/dimen_15dp"
+                        android:textColor="@color/charcoal_grey"
+                        android:textSize="@dimen/text_dimen_12sp"
+                        android:onClick="@{presenter::onClickAttach}"
+                        android:text="@string/text_attach_photo" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_15dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        app:setAdapter="@{presenter.attachedPhotoAdapter}" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/new_request_send_request"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_10dp"
+                    android:layout_marginStart="@dimen/dimen_10dp"
+                    android:paddingStart="@dimen/dimen_20dp"
+                    android:paddingEnd="@dimen/dimen_20dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/background_rounded_blue_radius2"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_dimen_12sp"
+                    android:onClick="@{presenter::onSendClicked}"
+                    android:visibility="@{presenter.isEditMode ? v.VISIBLE : v.GONE}"
+                    android:text="@string/text_send_request" />
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+</layout>

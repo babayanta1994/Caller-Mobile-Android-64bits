@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="presenter"
+            type="ru.true_ip.trueip.app.main_screen.photo_details_fragment.photo_page_fragment.PhotoPagePresenter" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <ImageView
+            android:src="@{presenter.photoPath}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dimen_50dp"
+            android:scaleType="fitCenter" />
+
+    </RelativeLayout>
+</layout>

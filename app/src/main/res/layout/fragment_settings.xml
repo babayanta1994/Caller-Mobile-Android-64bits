@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="presenter"
+            type="ru.true_ip.trueip.app.main_screen.settings_fragments.SettingsPresenter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:focusable="true"
+            android:clickable="true"
+            android:drawablePadding="16dp"
+            android:drawableStart="@drawable/ic_phone_call"
+            android:gravity="center_vertical"
+            android:onClick="@{presenter::onClickCallSettings}"
+            android:padding="16dp"
+            android:text="@string/calls"
+            android:textSize="@dimen/dimen_16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:focusable="true"
+            android:clickable="true"
+            android:drawablePadding="16dp"
+            android:drawableStart="@drawable/ic_info"
+            android:gravity="center_vertical"
+            android:onClick="@{presenter::onClickAboutSettings}"
+            android:padding="16dp"
+            android:text="@string/about"
+            android:textSize="@dimen/dimen_16sp" />
+
+    </LinearLayout>
+</layout>

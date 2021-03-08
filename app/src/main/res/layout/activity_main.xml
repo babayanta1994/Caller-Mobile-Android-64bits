@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="v"
+            type="android.view.View" />
+
+        <variable
+            name="presenter"
+            type="ru.true_ip.trueip.app.main_screen.MainPresenter" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbarlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/dimen_2dp">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                app:titleTextColor="@color/black">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/dimen_16dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    tools:text="Title" />
+
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/appbarlayout">
+
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:id="@+id/left_drawer"
+                android:layout_width="240dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:orientation="vertical">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="24dp">
+
+                        <TextView
+                            android:id="@+id/menu_objects"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="@dimen/dimen_8dp"
+                            android:drawableStart="@drawable/ic_live_video"
+                            android:gravity="center_vertical"
+                            android:onClick="@{presenter::onMenuItemClick}"
+                            android:paddingBottom="@dimen/dimen_16dp"
+                            android:paddingEnd="@dimen/dimen_16dp"
+                            android:paddingStart="@dimen/dimen_18dp"
+                            android:paddingTop="@dimen/dimen_16dp"
+                            android:text="@string/objects"
+                            android:textSize="@dimen/dimen_16sp" />
+
+                        <TextView
+                            android:id="@+id/menu_favorites"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="@dimen/dimen_8dp"
+                            android:drawableStart="@drawable/ic_star"
+                            android:gravity="center_vertical"
+                            android:onClick="@{presenter::onMenuItemClick}"
+                            android:padding="@dimen/dimen_16dp"
+                            android:text="@string/favorites"
+                            android:textSize="@dimen/dimen_16sp" />
+
+                        <TextView
+                            android:id="@+id/menu_hlm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="@dimen/dimen_10dp"
+                            android:drawableStart="@drawable/ic_hlm"
+                            android:gravity="center_vertical"
+                            android:onClick="@{presenter::onMenuItemClick}"
+                            android:padding="@dimen/dimen_16dp"
+                            android:paddingStart="@dimen/dimen_18dp"
+                            android:paddingTop="@dimen/dimen_16dp"
+                            android:paddingBottom="@dimen/dimen_16dp"
+                            android:paddingEnd="@dimen/dimen_16dp"
+                            android:text="@string/hlm"
+                            android:textSize="@dimen/dimen_16sp" />
+
+                        <TextView
+                            android:id="@+id/menu_picture"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="@dimen/dimen_8dp"
+                            android:drawableStart="@drawable/ic_photo"
+                            android:gravity="center_vertical"
+                            android:onClick="@{presenter::onMenuItemClick}"
+                            android:padding="@dimen/dimen_16dp"
+                            android:text="@string/picture"
+                            android:textSize="@dimen/dimen_16sp" />
+
+                        <TextView
+                            android:id="@+id/menu_settings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="@dimen/dimen_8dp"
+                            android:drawableStart="@drawable/ic_settings"
+                            android:gravity="center_vertical"
+                            android:onClick="@{presenter::onMenuItemClick}"
+                            android:padding="@dimen/dimen_16dp"
+                            android:text="@string/settings"
+                            android:textSize="@dimen/dimen_16sp" />
+
+                    </LinearLayout>
+
+                </ScrollView>
+            </LinearLayout>
+
+        </android.support.v4.widget.DrawerLayout>
+    </RelativeLayout>
+</layout>

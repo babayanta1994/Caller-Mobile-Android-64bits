@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import
+            alias="v"
+            type="android.view.View" />
+
+        <variable
+            name="presenter"
+            type="ru.true_ip.trueip.app.requests_screen.requests_fragment.RequestsPresenter" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:refreshing="@{presenter.isLoading}"
+            app:onRefreshListener="@{presenter::onRefreshSwiped}">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:setAdapter="@{presenter.requestsAdapter}"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_16dp"
+            android:layout_alignParentBottom="true"
+            android:visibility="@{presenter.showFloatingButton ? v.VISIBLE : v.GONE}"
+            android:layout_alignParentEnd="true"
+            android:onClick="@{presenter::onClickAdd}"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_add_white"
+            app:backgroundTint="@color/charcoal_grey" />
+    </RelativeLayout>
+</layout>

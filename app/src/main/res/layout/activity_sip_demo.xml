@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="@dimen/dimen_200dp"
+            android:layout_height="@dimen/dimen_50dp"
+            android:visibility="invisible"
+            android:layout_above="@+id/btn_current_state"
+            android:layout_centerHorizontal="true"
+            android:onClick="onRegisterClicked"
+            android:text="Register" />
+
+        <EditText
+            android:id="@+id/edt_user_name"
+            android:layout_width="@dimen/dimen_200dp"
+            android:layout_height="@dimen/dimen_50dp"
+            android:visibility="invisible"
+            android:layout_above="@+id/btn_register"
+            android:layout_centerHorizontal="true"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/edt_number_to_dial"
+            android:layout_width="@dimen/dimen_200dp"
+            android:visibility="invisible"
+            android:layout_height="@dimen/dimen_50dp"
+            android:layout_above="@+id/btn_make_call"
+            android:layout_centerHorizontal="true"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/btn_make_call"
+            android:layout_width="@dimen/dimen_200dp"
+            android:visibility="invisible"
+            android:layout_height="@dimen/dimen_50dp"
+            android:layout_centerInParent="true"
+            android:onClick="onMakeCallClicked"
+            android:text="Make call" />
+
+        <Button
+            android:id="@+id/btn_current_state"
+            android:layout_width="@dimen/dimen_200dp"
+            android:layout_height="@dimen/dimen_50dp"
+            android:visibility="invisible"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dimen_16dp"
+            android:onClick="onGetCurrentStateClicked"
+            android:text="Get current state" />
+
+        <VideoView
+            android:id="@+id/video_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+</layout>

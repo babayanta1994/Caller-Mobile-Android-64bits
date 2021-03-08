@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="v"
+            type="android.view.View" />
+
+        <variable
+            name="presenter"
+            type="ru.true_ip.trueip.app.messages_screen.MessagesPresenter" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- AppBar layout -->
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    app:titleTextColor="@color/black">
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <ImageButton
+                        android:id="@+id/messages_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="@dimen/dimen_18dp"
+                        android:background="@android:color/transparent"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:src="@drawable/ic_home_silhouette" />
+
+                </android.support.v7.widget.Toolbar>
+            </RelativeLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <!-- Ad Board -->
+        <RelativeLayout
+            android:id="@+id/messages_adboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_10dp"
+            android:layout_marginEnd="@dimen/dimen_35dp"
+            android:layout_marginStart="@dimen/dimen_35dp"
+            android:layout_marginTop="30dp"
+            android:onClick="@{presenter::onAdBoardClick}"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/messages_adboard_image"
+                android:layout_width="@dimen/dimen_35dp"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_megaphone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/messages_adboard_image"
+                android:paddingEnd="@dimen/dimen_20dp"
+                android:paddingStart="@dimen/dimen_20dp"
+                android:text="@string/text_adboard"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/messages_adboard_counter"
+                android:layout_width="@dimen/dimen_25dp"
+                android:layout_height="@dimen/dimen_25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/round_background"
+                android:gravity="center"
+                android:text="@={presenter.adboardCounter}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_dimen_15sp"
+                android:visibility="@{presenter.adboardCounterVisible ? v.VISIBLE : v.INVISIBLE}" />
+        </RelativeLayout>
+
+        <!-- Notifications -->
+        <RelativeLayout
+            android:id="@+id/messages_notifications"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_10dp"
+            android:layout_marginEnd="@dimen/dimen_35dp"
+            android:layout_marginStart="@dimen/dimen_35dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:onClick="@{presenter::onNotificationsClick}"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/messages_notifications_image"
+                android:layout_width="@dimen/dimen_35dp"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_notification" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/messages_notifications_image"
+                android:paddingEnd="@dimen/dimen_20dp"
+                android:paddingStart="@dimen/dimen_20dp"
+                android:text="@string/text_notifications"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/messages_notifications_counter"
+                android:layout_width="@dimen/dimen_25dp"
+                android:layout_height="@dimen/dimen_25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/round_background"
+                android:gravity="center"
+                android:text="@{presenter.notificationsCounter}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_dimen_15sp"
+                android:visibility="@{presenter.notificationsCounterVisible ? v.VISIBLE : v.INVISIBLE}" />
+        </RelativeLayout>
+
+        <!-- Responses -->
+        <RelativeLayout
+            android:id="@+id/messages_responses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_10dp"
+            android:layout_marginEnd="@dimen/dimen_35dp"
+            android:layout_marginStart="@dimen/dimen_35dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:onClick="@{presenter::onResponsesClick}"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/messages_responses_image"
+                android:layout_width="@dimen/dimen_35dp"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_feedbacks" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_toEndOf="@+id/messages_responses_image"
+                android:paddingEnd="@dimen/dimen_20dp"
+                android:paddingStart="@dimen/dimen_20dp"
+                android:text="@string/text_responses"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/messages_responses_counter"
+                android:layout_width="@dimen/dimen_25dp"
+                android:layout_height="@dimen/dimen_25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/round_background"
+                android:gravity="center"
+                android:text="99"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_dimen_15sp"
+                android:visibility="invisible" />
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

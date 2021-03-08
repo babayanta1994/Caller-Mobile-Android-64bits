@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/selection_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/dimen_37dp"
+            android:layout_marginTop="@dimen/dimen_3dp"
+            android:layout_marginBottom="@dimen/dimen_3dp"
+            android:layout_marginStart="@dimen/dimen_6dp"
+            android:layout_marginEnd="@dimen/dimen_6dp"
+            android:background="@drawable/background_answer_option">
+
+            <ProgressBar
+                android:id="@+id/votes_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_above="@id/aligner"
+                android:max="100"
+                android:progress="32"
+                android:progressDrawable="@drawable/progress_drawable" />
+
+            <TextView
+                android:id="@+id/option_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_11dp"
+                android:layout_marginEnd="@dimen/dimen_6dp"
+                android:layout_toStartOf="@id/check_mark_container"
+                android:minHeight="@dimen/dimen_37dp"
+                android:paddingTop="@dimen/dimen_3dp"
+                android:paddingBottom="@dimen/dimen_3dp"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:textSize="@dimen/text_dimen_10sp"
+                android:textColor="@color/black"
+                android:text="Да, устанавливаем"/>
+
+            <View
+                android:id="@+id/aligner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_0dp"
+                android:layout_below="@id/option_text" />
+
+            <RelativeLayout
+                android:id="@+id/check_mark_container"
+                android:layout_width="@dimen/dimen_64dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true">
+
+                <TextView
+                    android:id="@+id/votes_percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dimen_11dp"
+                    android:layout_toStartOf="@id/aligner2"
+                    android:text="32%"
+                    android:textColor="@color/charcoal_grey"
+                    android:textSize="@dimen/text_dimen_12sp" />
+
+                <ImageView
+                    android:id="@+id/selected_answer_pic"
+                    android:layout_width="@dimen/dimen_14dp"
+                    android:layout_height="@dimen/dimen_14dp"
+                    android:layout_toStartOf="@id/votes_percent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/dimen_8dp"
+                    android:src="@drawable/drawable_selection_mark" />
+                <View
+                    android:id="@+id/aligner2"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import
+            alias="params"
+            type="android.view.ViewGroup.LayoutParams" />
+
+        <import
+            alias="v"
+            type="android.view.View" />
+
+        <variable
+            name="presenter"
+            type="ru.true_ip.trueip.app.device_screen.DevicePresenter" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                app:titleTextColor="@color/black">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:layout_toStartOf="@+id/favorite"
+                        android:text="@{presenter.deviceName}"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <CheckBox
+                        android:id="@+id/favorite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="16dp"
+                        android:button="@drawable/selector_checkbox_favorite"
+                        android:soundEffectsEnabled="false"
+                        android:checked="@={presenter.isFavorite}"
+                        android:onClick="@{presenter::onFavoriteClick}" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+
+        <!-- Video Layout -->
+        <LinearLayout
+            android:id="@+id/camera_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@{presenter.isFullScreen ? @id/aligner : presenter.isCamera ? @id/container_camera : @id/container_panel}"
+            android:layout_below="@id/appbar_layout"
+            android:focusable="true"
+            android:clickable="true"
+            android:onClick="@{presenter::onDisplayPanelClicked}"
+            android:visibility="@{presenter.showVideoframe ? v.VISIBLE : v.INVISIBLE}">
+
+            <SurfaceView
+                android:id="@+id/camera_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <!-- Concierge Layout -->
+        <LinearLayout
+            android:id="@+id/concierge_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@{presenter.isFullScreen ? @id/aligner : presenter.isCamera ? @id/container_camera : @id/container_panel}"
+            android:layout_below="@id/appbar_layout"
+            android:focusable="true"
+            android:clickable="true"
+            android:onClick="@{presenter::onDisplayPanelClicked}"
+            android:gravity="center"
+            android:visibility="@{!presenter.showVideoframe &amp;&amp; presenter.isConciergeCall ? v.VISIBLE : v.INVISIBLE}">
+
+            <ImageView
+                android:id="@+id/concierge_view"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/concierge"/>
+        </LinearLayout>
+
+        <!-- Loading message Layout -->
+        <LinearLayout
+            android:id="@+id/message_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{!presenter.showVideoframe &amp;&amp; !presenter.isConciergeCall ? v.VISIBLE : v.INVISIBLE}"
+            android:gravity="center"
+            android:background="@color/black"
+            android:layout_below="@id/appbar_layout"
+            android:focusable="true"
+            android:clickable="true"
+            android:onClick="@{presenter::onDisplayPanelClicked}"
+            android:layout_above="@{presenter.isFullScreen ? @id/aligner : presenter.isCamera ? @id/container_camera : @id/container_panel}">
+            <TextView
+                android:id="@+id/message_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:text="@{presenter.preparingVideoText}"/>
+        </LinearLayout>
+
+        <!-- android:background="@{presenter.isPanelShown ? @drawable/selector_show_panel : @drawable/selector_hide_panel" -->
+
+        <TextView
+            android:id="@+id/btn_back_to_call"
+            android:layout_width="244dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/appbar_layout"
+            android:layout_marginStart="65dp"
+            android:layout_marginEnd="65dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:background="@drawable/background_rounded_blue"
+            android:onClick="@{presenter::onBackToCallClicked}"
+            android:soundEffectsEnabled="false"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="@string/text_back_to_call"
+            android:visibility="@{presenter.showBackToCallButton &amp;&amp; presenter.isIncomingCallState ? v.VISIBLE : v.INVISIBLE}"/>
+
+        <ru.true_ip.trueip.views.TintableImageView
+            android:id="@+id/btn_show_panel"
+            android:layout_width="@dimen/dimen_30dp"
+            android:layout_height="@dimen/dimen_30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/appbar_layout"
+            android:layout_marginEnd="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:background="@drawable/selector_show_panel"
+            android:selected="@{presenter.isFullScreen ? true : false}"
+            android:onClick="@{presenter::onFullScreenClicked}"
+            android:soundEffectsEnabled="false"
+            android:padding="@dimen/dimen_2dp"
+            android:src="@drawable/ic_expand"
+            app:selectorTint="@color/selector_tint_white_blue" />
+
+        <ru.true_ip.trueip.views.TintableImageView
+            android:id="@+id/btn_list_devices"
+            android:layout_width="@dimen/dimen_30dp"
+            android:layout_height="@dimen/dimen_30dp"
+            android:layout_below="@+id/appbar_layout"
+            android:layout_marginLeft="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:background="@drawable/selector_panel_list"
+            android:onClick="@{presenter::onDeviceListClicked}"
+            android:soundEffectsEnabled="false"
+            android:padding="@dimen/dimen_2dp"
+            android:selected="@{presenter.isDeviceListShown}"
+            android:src="@drawable/ic_circle_arrows"
+            android:visibility="@{presenter.isShowButton &amp;&amp; !presenter.isConciergeCall ? v.VISIBLE : v.INVISIBLE}"
+            app:selectorTint="@color/selector_tint_white_blue" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/btn_list_devices"
+            android:layout_above="@{presenter.isCamera ? @id/container_camera : @id/container_panel}"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:layout_marginTop="@dimen/dimen_12dp"
+            android:layout_marginBottom="@dimen/dimen_20dp"
+            android:orientation="vertical"
+            android:visibility="@{presenter.isDeviceListShown ? v.VISIBLE : v.INVISIBLE}">
+
+            <View
+                android:layout_width="@dimen/dimen_20dp"
+                android:layout_height="@dimen/dimen_12dp"
+                android:layout_marginLeft="@dimen/dimen_12dp"
+                android:background="@drawable/ic_triangle_top" />
+
+            <RelativeLayout
+                android:layout_width="@dimen/dimen_300dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_rounded_white">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_devices"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    android:setAdapter="@{presenter.deviceListAdapter}"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <!-- Layout for camera -->
+        <RelativeLayout
+            android:id="@+id/container_camera"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_220dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:visibility="@{presenter.isPanelShown &amp;&amp; presenter.isCamera ?  v.VISIBLE: v.GONE}">
+
+            <!-- Make screenshot -->
+            <RelativeLayout
+                android:id="@+id/container_camera_shot"
+                android:layout_width="@dimen/dimen_70dp"
+                android:layout_height="@dimen/dimen_70dp"
+                android:layout_marginLeft="@dimen/dimen_25dp"
+                android:layout_marginTop="@dimen/dimen_25dp"
+                android:layout_centerInParent="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:onClick="@{presenter::onClick}"
+                android:soundEffectsEnabled="false"
+                android:clickable="@{presenter.isScreenShotEnabled ? true : false}">
+
+                <ImageView
+                    android:id="@+id/camera_shot_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_29dp"
+                    android:layout_above="@+id/camera_shot_name"
+                    android:layout_marginBottom="@dimen/dimen_16dp"
+                    android:src="@{presenter.isScreenShotEnabled ? @drawable/ic_photo_camera : @drawable/ic_photo_camera_grey}"/>
+
+                <TextView
+                    android:id="@+id/camera_shot_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/text_picture"
+                    android:textSize="@dimen/text_dimen_12sp" />
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <!-- Layout for panel -->
+        <RelativeLayout
+            android:id="@+id/container_panel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_220dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:visibility="@{presenter.isPanelShown &amp;&amp; !presenter.isCamera ?  v.VISIBLE: v.GONE}">
+
+            <!-- Lock 1 -->
+            <RelativeLayout
+                android:id="@+id/container_lock_1"
+                android:layout_width="@dimen/dimen_70dp"
+                android:layout_height="@dimen/dimen_70dp"
+                android:layout_marginLeft="@dimen/dimen_25dp"
+                android:layout_marginTop="@dimen/dimen_25dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="@{presenter.isDTMFOneConfigured ? true : false}"
+                android:onClick="@{presenter::onClick}"
+                android:soundEffectsEnabled="false"
+                android:visibility="@{presenter.isCamera ? v.INVISIBLE : v.VISIBLE}">
+
+                <!-- &amp;&amp; presenter.isConversationInProgress  -->
+
+                <ImageView
+                    android:id="@+id/lock_1_icon"
+                    android:layout_width="@dimen/dimen_24dp"
+                    android:layout_height="@dimen/dimen_35dp"
+                    android:layout_above="@+id/lock_1_name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/dimen_16dp"
+                    android:src="@drawable/ic_padlock_1" />
+
+                <TextView
+                    android:id="@+id/lock_1_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/text_lock_1"
+                    android:textSize="@dimen/text_dimen_12sp" />
+            </RelativeLayout>
+
+            <!-- Lock 2 -->
+            <RelativeLayout
+                android:id="@+id/container_lock_2"
+                android:layout_width="@dimen/dimen_70dp"
+                android:layout_height="@dimen/dimen_70dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dimen_25dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="@{presenter.isDTMFTwoConfigured ? true : false}"
+                android:onClick="@{presenter::onClick}"
+                android:soundEffectsEnabled="false"
+                android:visibility="@{presenter.isCamera ? v.INVISIBLE : v.VISIBLE}">
+
+                <ImageView
+                    android:id="@+id/lock_2_icon"
+                    android:layout_width="@dimen/dimen_24dp"
+                    android:layout_height="@dimen/dimen_35dp"
+                    android:layout_above="@+id/lock_2_name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/dimen_16dp"
+                    android:src="@{presenter.isDTMFTwoConfigured ? @drawable/ic_padlock_2 : @drawable/ic_padlock_2_grey}" />
+
+                <TextView
+                    android:id="@+id/lock_2_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/text_lock_2"
+                    android:textSize="@dimen/text_dimen_12sp" />
+            </RelativeLayout>
+
+            <!-- Make screenshot -->
+            <RelativeLayout
+                android:id="@+id/container_shot"
+                android:layout_width="@dimen/dimen_70dp"
+                android:layout_height="@dimen/dimen_70dp"
+                android:layout_below="@+id/container_lock_1"
+                android:layout_marginLeft="@dimen/dimen_25dp"
+                android:layout_marginTop="@dimen/dimen_25dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="@{presenter.isScreenShotEnabled ? true : false}"
+                android:soundEffectsEnabled="false"
+                android:onClick="@{presenter::onClick}">
+
+                <ImageView
+                    android:id="@+id/shot_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_29dp"
+                    android:layout_above="@+id/shot_name"
+                    android:layout_marginBottom="@dimen/dimen_16dp"
+                    android:src="@{presenter.isScreenShotEnabled ? @drawable/ic_photo_camera : @drawable/ic_photo_camera_grey}" />
+
+                <TextView
+                    android:id="@+id/shot_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/text_picture"
+                    android:textSize="@dimen/text_dimen_12sp" />
+            </RelativeLayout>
+
+            <!-- Microphone -->
+            <RelativeLayout
+                android:id="@+id/container_micro"
+                android:layout_width="@dimen/dimen_70dp"
+                android:layout_height="@dimen/dimen_70dp"
+                android:layout_below="@+id/container_lock_2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dimen_25dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:onClick="@{presenter::onClick}"
+                android:soundEffectsEnabled="false"
+                android:visibility="@{presenter.isCamera ? v.INVISIBLE : v.VISIBLE}">
+
+                <ImageView
+                    android:id="@+id/micro_icon"
+                    android:layout_width="@dimen/dimen_18dp"
+                    android:layout_height="@dimen/dimen_29dp"
+                    android:layout_above="@+id/micro_name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/dimen_16dp"
+                    android:src="@{presenter.isMuted ? @drawable/ic_voice_mic_x : @drawable/ic_voice_mic}" />
+
+                <TextView
+                    android:id="@+id/micro_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/text_microphone"
+                    android:textSize="@dimen/text_dimen_12sp" />
+            </RelativeLayout>
+
+            <!-- Hangup -->
+            <RelativeLayout
+                android:id="@+id/container_hangup"
+                android:layout_width="@dimen/dimen_70dp"
+                android:layout_height="@dimen/dimen_70dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dimen_25dp"
+                android:layout_marginTop="@dimen/dimen_25dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:onClick="@{presenter::onClick}"
+                android:soundEffectsEnabled="false"
+                android:visibility="@{presenter.isCallInProgress &amp;&amp; !presenter.isCamera ? v.VISIBLE : v.INVISIBLE}">
+
+                <ImageView
+                    android:id="@+id/cancel_call_icon"
+                    android:layout_width="@dimen/dimen_30dp"
+                    android:layout_height="@dimen/dimen_30dp"
+                    android:layout_above="@+id/cancel_call_name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/dimen_20dp"
+                    android:src="@drawable/ic_cancel_phone" />
+
+                <TextView
+                    android:id="@+id/cancel_call_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/text_cancel"
+                    android:textSize="@dimen/text_dimen_12sp" />
+            </RelativeLayout>
+
+            <!-- Accept Call -->
+            <RelativeLayout
+                android:id="@+id/container_accept_call"
+                android:layout_width="@dimen/dimen_70dp"
+                android:layout_height="@dimen/dimen_70dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dimen_25dp"
+                android:layout_marginTop="@dimen/dimen_25dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:onClick="@{presenter::onClick}"
+                android:soundEffectsEnabled="false"
+                android:visibility="@{presenter.isCallInProgress || presenter.isCamera ? v.INVISIBLE : v.VISIBLE}">
+
+                <ImageView
+                    android:id="@+id/accept_call_icon"
+                    android:layout_width="@dimen/dimen_30dp"
+                    android:layout_height="@dimen/dimen_30dp"
+                    android:layout_above="@+id/accept_call_name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/dimen_20dp"
+                    android:src="@drawable/ic_phone_green" />
+
+                <TextView
+                    android:id="@+id/accept_call_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="@{presenter.isIncomingCallState ? @string/text_answer : @string/text_make_call}"
+                    android:textSize="@dimen/text_dimen_12sp" />
+            </RelativeLayout>
+
+            <!-- Loudspeaker -->
+            <RelativeLayout
+                android:id="@+id/container_volume"
+                android:layout_width="@dimen/dimen_70dp"
+                android:layout_height="@dimen/dimen_70dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/container_hangup"
+                android:layout_marginRight="@dimen/dimen_25dp"
+                android:layout_marginTop="@dimen/dimen_25dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:onClick="@{presenter::onClick}"
+                android:soundEffectsEnabled="false"
+                android:visibility="@{(presenter.isIncomingCallState &amp;&amp; !presenter.isConversationInProgress) || presenter.isCamera ? v.INVISIBLE : v.VISIBLE}">
+
+                <ImageView
+                    android:id="@+id/container_volume_icon"
+                    android:layout_width="@dimen/dimen_35dp"
+                    android:layout_height="@dimen/dimen_29dp"
+                    android:layout_above="@+id/volume_name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/dimen_16dp"
+                    android:src="@{presenter.isLoudSpeakerOn ? @drawable/ic_volume : @drawable/ic_volume_x}" />
+
+                <TextView
+                    android:id="@+id/volume_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/text_dynamic"
+                    android:textSize="@dimen/text_dimen_12sp" />
+            </RelativeLayout>
+
+            <!-- Decline Call -->
+            <RelativeLayout
+                android:id="@+id/container_decline_call"
+                android:layout_width="@dimen/dimen_70dp"
+                android:layout_height="@dimen/dimen_70dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/container_accept_call"
+                android:layout_marginRight="@dimen/dimen_25dp"
+                android:layout_marginTop="@dimen/dimen_25dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:onClick="@{presenter::onClick}"
+                android:soundEffectsEnabled="false"
+                android:visibility="@{presenter.isIncomingCallState &amp;&amp; !presenter.isConversationInProgress &amp;&amp; !presenter.isCamera ? v.VISIBLE : v.INVISIBLE}">
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_30dp"
+                    android:layout_height="@dimen/dimen_30dp"
+                    android:layout_above="@+id/cancel_call_name_incoming"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/dimen_20dp"
+                    android:src="@drawable/ic_cancel_phone" />
+
+                <TextView
+                    android:id="@+id/cancel_call_name_incoming"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/text_cancel"
+                    android:textSize="@dimen/text_dimen_12sp" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+        <View
+            android:id="@+id/aligner"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_0dp" />
+    </RelativeLayout>
+</layout>

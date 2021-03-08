@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="v"
+            type="android.view.View" />
+
+        <variable
+            name="e"
+            type="android.view.inputmethod.EditorInfo" />
+
+        <variable
+            name="presenter"
+            type="ru.true_ip.trueip.app.add_new_device_screen.AddNewDevicePresenter" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/dimen_2dp">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:contentInsetStart="@dimen/dimen_0dp"
+                app:contentInsetEnd="@dimen/dimen_0dp">
+
+                <ImageView
+                    android:id="@+id/btn_close"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_gravity="start|center_vertical"
+                    android:background="?attr/selectableItemBackground"
+                    android:onClick="@{presenter::onClicked}"
+                    android:padding="@dimen/dimen_13dp"
+                    android:src="@drawable/ic_close_btn"
+                    android:tint="@color/charcoal_grey" />
+
+                <TextView
+                    android:id="@+id/btn_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="@dimen/dimen_16dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:onClick="@{presenter::onClicked}"
+                    android:padding="@dimen/dimen_5dp"
+                    android:text="@{presenter.isEditMode ? @string/text_save : @string/text_add}"
+                    android:visibility="@{presenter.isCloud ? v.GONE : v.VISIBLE}"
+                    android:textSize="@dimen/dimen_13sp" />
+
+                <TextView
+                    android:id="@+id/btn_delete_cloud"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="@dimen/dimen_16dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:onClick="@{presenter::onClicked}"
+                    android:padding="@dimen/dimen_5dp"
+                    android:text="@string/text_delete"
+                    android:visibility="@{presenter.isCloud ? v.VISIBLE : v.GONE}"
+                    android:textSize="@dimen/dimen_13sp" />
+
+            </android.support.v7.widget.Toolbar>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:elevation="@dimen/dimen_2dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dimen_16dp"
+                    android:text="@{presenter.isEditMode ? @string/text_edit_device : @string/text_add_new_device}"
+                    android:textSize="@dimen/text_dimen_16sp" />
+
+            </RelativeLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{presenter.isCloud ? v.INVISIBLE : v.VISIBLE}">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_10dp"
+                    android:layout_marginStart="@dimen/dimen_16dp"
+                    android:layout_marginTop="@dimen/dimen_24dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/text_type_device"
+                    android:textColor="@color/grey_text"
+                    android:textSize="@dimen/text_dimen_14sp" />
+
+                <RelativeLayout
+                    android:id="@+id/item_ip_call_panel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true">
+
+                    <TextView
+                        android:id="@+id/text_device_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimen_10dp"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:text="@{presenter.isCameraDevice ? @string/text_ip_camera_panel : @string/text_ip_call_panel}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/item_additional_necklace"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:onClick="@{presenter::changeChecked}"
+                    android:visibility="@{presenter.isCameraDevice ? v.GONE : v.VISIBLE}">
+
+                    <TextView
+                        android:id="@+id/text_additional_necklace"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimen_12dp"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_12dp"
+                        android:text="@string/text_additional_necklace"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+                    <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:checked="@={presenter.isAdditionRelayChecked}" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:layout_marginTop="@dimen/dimen_16dp"
+                    android:background="@drawable/background_bottom_border" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_16dp"
+                    android:layout_marginTop="@dimen/dimen_16dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/text_naming"
+                    android:textColor="@color/grey_text"
+                    android:textSize="@dimen/text_dimen_14sp" />
+
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_24dp"
+                    android:layout_marginStart="@dimen/dimen_16dp"
+                    android:layout_marginEnd="@dimen/dimen_16dp"
+                    android:layout_marginTop="@dimen/dimen_22dp"
+                    android:background="@color/white"
+                    android:hint="@string/text_enter_door"
+                    android:inputType="text"
+                    android:text="@={presenter.deviceName}"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_color"
+                    android:textSize="@dimen/text_dimen_16sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:layout_marginTop="@dimen/dimen_27dp"
+                    android:background="@drawable/background_bottom_border" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_16dp"
+                    android:layout_marginTop="@dimen/dimen_16dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/text_photo"
+                    android:textColor="@color/grey_text"
+                    android:textSize="@dimen/text_dimen_14sp" />
+
+                <RelativeLayout
+                    android:id="@+id/object_photo_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_60dp"
+                    android:layout_marginBottom="@dimen/dimen_5dp"
+                    android:layout_marginTop="@dimen/dimen_15dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:onClick="@{presenter::onClicked}">
+
+                    <ImageView
+                        android:id="@+id/object_photo_default"
+                        android:layout_width="@dimen/dimen_40dp"
+                        android:layout_height="@dimen/dimen_40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:background="@drawable/background_circle_stroke"
+                        android:padding="@dimen/dimen_7dp"
+                        android:scaleType="fitCenter"
+                        android:src="@{presenter.isCameraDevice ? @drawable/camera : @drawable/panel}" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/object_photo"
+                        android:layout_width="@dimen/dimen_40dp"
+                        android:layout_height="@dimen/dimen_40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:scaleType="centerCrop" />
+
+                    <TextView
+                        android:id="@+id/text_object_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/object_photo_default"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_toRightOf="@+id/object_photo_default"
+                        android:text="@{presenter.objectName}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+                    <TextView
+                        android:id="@+id/device_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/object_photo_default"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_27dp"
+                        android:layout_toRightOf="@+id/object_photo_default"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@{presenter.deviceName}"
+                        android:textColor="@color/grey_color"
+                        android:textSize="@dimen/text_dimen_14sp" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/btn_photo_by_default"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_10dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:onClick="@{presenter::onClicked}"
+                    android:padding="@dimen/dimen_16dp"
+                    android:text="@string/text_photo_by_default"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_dimen_16sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:layout_marginTop="@dimen/dimen_1dp"
+                    android:background="@drawable/background_bottom_border" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_10dp"
+                    android:layout_marginStart="@dimen/dimen_16dp"
+                    android:layout_marginTop="@dimen/dimen_16dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/text_auth_on_device"
+                    android:textColor="@color/grey_text"
+                    android:textSize="@dimen/text_dimen_14sp" />
+
+
+                <RelativeLayout
+                    android:id="@+id/item_server_port"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:visibility="@{presenter.isCameraDevice ? v.GONE : v.VISIBLE}">
+
+                    <TextView
+                        android:id="@+id/text_server_port"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_6dp"
+                        android:text="@string/text_sip_number_panel"
+                        android:textColor="@color/grey_text"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+                    <EditText
+                        android:id="@+id/et_sip_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_24dp"
+                        android:layout_below="@+id/text_server_port"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_4dp"
+                        android:background="@color/white"
+                        android:hint="8001"
+                        android:inputType="number"
+                        android:text="@={presenter.sipNumber}"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey_color"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/item_rtsp_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:clickable="true"
+                    android:visibility="@{presenter.isCameraDevice ? v.GONE : v.VISIBLE}">
+
+                    <TextView
+                        android:id="@+id/text_rtsp_link"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_6dp"
+                        android:text="@string/text_full_rtsp_link"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+                    <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:checked="@={presenter.isFullRTSPLink}" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/item_full_rtsp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:clickable="true"
+                    android:visibility="@{(presenter.isFullRTSPLink || presenter.isCameraDevice) ? v.VISIBLE : v.GONE}">
+
+                    <TextView
+                        android:id="@+id/text_full_rtsp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_6dp"
+                        android:text="@string/text_rtsp"
+                        android:textColor="@color/grey_text"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+
+                    <EditText
+                        android:id="@+id/et_full_rtsp"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_24dp"
+                        android:layout_below="@+id/text_full_rtsp"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_4dp"
+                        android:background="@color/white"
+                        android:enabled="@{presenter.isFullRTSPLink || presenter.isCameraDevice}"
+                        android:hint="@string/text_rtsp_hint"
+                        android:inputType="text"
+                        android:text="@={presenter.fullRTSP}"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey_color"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/item_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:clickable="true"
+                    android:visibility="@{(!presenter.isFullRTSPLink &amp;&amp; !presenter.isCameraDevice)? v.VISIBLE : v.GONE}">
+
+                    <TextView
+                        android:id="@+id/text_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_6dp"
+                        android:text="@string/text_login_en"
+                        android:textColor="@color/grey_text"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+                    <EditText
+                        android:id="@+id/et_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_24dp"
+                        android:layout_below="@+id/text_login"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_4dp"
+                        android:background="@color/white"
+                        android:hint="@string/text_admin"
+                        android:inputType="text"
+                        android:text="@={presenter.login}"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey_color"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/item_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:clickable="true"
+                    android:visibility="@{(!presenter.isFullRTSPLink &amp;&amp; !presenter.isCameraDevice)? v.VISIBLE : v.GONE}">
+
+                    <TextView
+                        android:id="@+id/text_password"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_6dp"
+                        android:text="@string/text_password"
+                        android:textColor="@color/grey_text"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+                    <EditText
+                        android:id="@+id/et_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_24dp"
+                        android:layout_below="@+id/text_password"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_4dp"
+                        android:background="@color/white"
+                        android:hint="@string/text_admin"
+                        android:inputType="textPassword"
+                        android:text="@={presenter.password}"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey_color"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/item_ip_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:clickable="true"
+                    android:visibility="@{(!presenter.isFullRTSPLink &amp;&amp; !presenter.isCameraDevice)? v.VISIBLE : v.GONE}">
+
+                    <TextView
+                        android:id="@+id/text_ip_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_6dp"
+                        android:text="@string/text_ip_address"
+                        android:textColor="@color/grey_text"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+                    <EditText
+                        android:id="@+id/et_ip_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_24dp"
+                        android:layout_below="@+id/text_ip_address"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_4dp"
+                        android:background="@color/white"
+                        android:imeOptions="actionNext"
+                        android:maxLines="1"
+                        android:text="@={presenter.ipAddress}"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey_color"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/item_port"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:clickable="true"
+                    android:visibility="@{(!presenter.isFullRTSPLink &amp;&amp; !presenter.isCameraDevice) ? v.VISIBLE : v.GONE}">
+
+                    <TextView
+                        android:id="@+id/text_port"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_6dp"
+                        android:text="@string/text_port"
+                        android:textColor="@color/grey_text"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+                    <EditText
+                        android:id="@+id/et_port"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_24dp"
+                        android:layout_below="@+id/text_port"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_4dp"
+                        android:background="@color/white"
+                        android:hint="@string/hint_554"
+                        android:inputType="number"
+                        android:text="@={presenter.port}"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey_color"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+                </RelativeLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:layout_marginTop="@dimen/dimen_27dp"
+                    android:background="@drawable/background_bottom_border" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_10dp"
+                    android:layout_marginStart="@dimen/dimen_16dp"
+                    android:layout_marginTop="@dimen/dimen_16dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/text_open_door"
+                    android:textColor="@color/grey_text"
+                    android:textSize="@dimen/text_dimen_14sp"
+                    android:visibility="@{presenter.isCameraDevice ? v.GONE : v.VISIBLE}" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:visibility="@{presenter.isCameraDevice ? v.GONE : v.VISIBLE}">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:text="@string/text_dtmf_1"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+                    <EditText
+                        android:id="@+id/et_dftm1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/dimen_8dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:background="@color/white"
+                        android:digits="0123456789#"
+                        android:inputType="phone"
+                        android:text="@={presenter.dftm1}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:visibility="@{presenter.isCameraDevice ? v.GONE : v.VISIBLE}">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:enabled="@{presenter.isAdditionRelayChecked}"
+                        android:maxLines="1"
+                        android:text="@string/text_dtmf_2"
+                        android:textColor="@color/selector_enbled_text"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/dimen_8dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:background="@color/white"
+                        android:digits="0123456789#"
+                        android:enabled="@{presenter.isAdditionRelayChecked}"
+                        android:inputType="phone"
+                        android:text="@={presenter.dftm2}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_dimen_16sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:layout_marginTop="@dimen/dimen_27dp"
+                    android:background="@drawable/background_bottom_border"
+                    android:visibility="@{presenter.isCameraDevice ? v.GONE : v.VISIBLE}" />
+
+                <TextView
+                    android:id="@+id/btn_delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_60dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:onClick="@{presenter::onClicked}"
+                    android:paddingLeft="@dimen/dimen_16dp"
+                    android:text="@string/text_delete"
+                    android:textColor="@color/scarlet"
+                    android:textSize="@dimen/text_dimen_16sp"
+                    android:visibility="@{presenter.isEditMode ? v.VISIBLE : v.GONE}" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

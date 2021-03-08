@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_8dp">
+
+        <RelativeLayout
+            android:id="@+id/device_container"
+            android:layout_width="@dimen/dimen_100dp"
+            android:layout_height="@dimen/dimen_100dp"
+            android:background="@drawable/background_rounded_grey">
+
+            <ImageView
+                android:id="@+id/icon_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                tools:src="@drawable/panel" />
+
+            <ImageView
+                android:id="@+id/icon_device"
+                android:layout_centerInParent="true"
+                android:scaleType="centerCrop"
+                android:layout_width="@dimen/dimen_64dp"
+                android:layout_height="@dimen/dimen_48dp" />
+            <ImageView
+                android:id="@+id/icon_edit_mode"
+                android:layout_width="@dimen/dimen_48dp"
+                android:layout_height="@dimen/dimen_48dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_pencil"/>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/dimen_8dp"
+                android:layout_centerHorizontal="true">
+
+                <View
+                    android:id="@+id/indicator"
+                    android:layout_width="@dimen/dimen_32dp"
+                    android:layout_height="@dimen/dimen_3dp"
+                    android:layout_gravity="center"
+                    android:background="@color/scarlet" />
+
+            </FrameLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/device_container"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_dimen_10sp"
+            tools:text="@string/text_entrance_door" />
+
+    </RelativeLayout>
+</layout>

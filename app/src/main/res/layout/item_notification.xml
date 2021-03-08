@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/main_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:layout_marginStart="@dimen/dimen_20dp"
+            android:layout_marginEnd="@dimen/dimen_20dp">
+            <ImageView
+                android:id="@+id/image_photo"
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/concierge" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/image_photo"
+                android:layout_marginStart="@dimen/dimen_16dp">
+                <LinearLayout
+                    android:id="@+id/name_time_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textSize="@dimen/dimen_16sp"
+                        android:textColor="@color/dark_gray"
+                        android:text="@string/text_concierge" />
+
+                    <TextView
+                        android:id="@+id/timestamp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textSize="@dimen/text_dimen_14sp"
+                        android:textColor="@color/pinkish_grey"
+                        android:text="18 ноя 18:50" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/new_notification_mark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:id="@+id/mark"
+                        android:src="@drawable/drawable_request_status_done"
+                        android:layout_width="@dimen/dimen_9dp"
+                        android:layout_height="@dimen/dimen_9dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/mark"
+                        android:layout_marginStart="@dimen/dimen_6dp"
+                        android:textSize="@dimen/text_dimen_14sp"
+                        android:textColor="@color/pinkish_grey"
+                        android:text="@string/text_new_announce" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_photo"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textSize="@dimen/dimen_16sp"
+                android:textColor="@color/dark_gray"
+                android:text="Тема уведомления" />
+
+            <TextView
+                android:id="@+id/message_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/subject"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:textSize="@dimen/text_dimen_12sp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textColor="@color/charcoal_grey"
+                android:text="15 ноября с 12 до 16 будет отсутсвовать горячая вода, в связи с профилактическими раотами в котельной.
+Заранее приносим свои извенения за неудобства."/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_below="@+id/main_content"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:background="@color/light_gray" />
+
+    </RelativeLayout>
+</layout>

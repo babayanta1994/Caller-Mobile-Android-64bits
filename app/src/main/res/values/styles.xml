@@ -1,0 +1,44 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/black</item>
+    </style>
+
+    <!-- Tab text -->
+    <style name="TabText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@drawable/selector_tab_text</item>
+    </style>
+
+    <style name="OnOffSwitch" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">#FF00B2DE</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">#FF00FF00</item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">#FFFFFFFF</item>
+    </style>
+
+    <style name="send_message_button_style">
+        <item name="android:src">@drawable/drawable_send_message_button</item>
+        <item name="android:background">@drawable/background_send_message_button</item>
+    </style>
+
+    <style name="message_edit_text_style">
+        <item name="android:hint">@string/hint_message_edit_text</item>
+        <item name="android:inputType">textMultiLine|textLongMessage|textCapSentences</item>
+        <item name="android:background">@drawable/background_message_text_field</item>
+        <item name="android:textSize">@dimen/text_dimen_17sp</item>
+        <item name="android:maxLines">4</item>
+    </style>
+
+</resources>

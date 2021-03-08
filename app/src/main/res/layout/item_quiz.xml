@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_84dp">
+        <RelativeLayout
+            android:id="@+id/pic_container"
+            android:layout_height="match_parent"
+            android:layout_width="@dimen/dimen_52dp"
+            android:layout_alignParentStart="true">
+            <ImageView
+                android:id="@+id/quiz_pic"
+                android:layout_width="@dimen/dimen_12dp"
+                android:layout_height="@dimen/dimen_12dp"
+                android:layout_centerInParent="true"
+                android:visibility="invisible"
+                android:background="@drawable/background_quiz_pic"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/pic_container"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/timestamp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dimen_10dp"
+                    android:textSize="@dimen/dimen_16sp"
+                    android:textColor="@color/dark_gray"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:layout_alignParentBottom="true" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dimen_10dp"
+                    android:layout_alignParentTop="true"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textSize="@dimen/text_dimen_14sp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/light_gray"/>
+    </RelativeLayout>
+</layout>
